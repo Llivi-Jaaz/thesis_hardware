@@ -30,7 +30,7 @@ void loop() {
   Serial.print("Packet: ");
   Serial.println(counter);
   LoRa.beginPacket();
-  LoRa.print("Data:");
+  //LoRa.print("Data:");
   LoRa.print(counter);
 
   // Printing LoRa ID
@@ -56,5 +56,5 @@ void loop() {
   }
  LoRa.endPacket();
   counter++;
-  delay(1000);
+  delay(2000);
 }
