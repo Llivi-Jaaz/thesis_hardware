@@ -20,6 +20,9 @@ void setup() {
 
   pinMode(fltswtch, INPUT_PULLUP);
   pinMode (led, OUTPUT);
+
+  byte uniqueID[8];
+  LoRa.getUniqueId(uniqueID);
 }
 
 
@@ -30,6 +33,12 @@ void loop() {
   LoRa.beginPacket();
   LoRa.print("Data:");
   LoRa.print(counter);
+
+  Serial.print("LoRa Module Unique ID: ");
+  for (int i = 0; i < 8; i++) {
+    Serial.print(uniqueID[i], HEX);
+    Serial.print(" ");
+  }
   int floatState = digitalRead(fltswtch);
 
   if (floatState == LOW) {
