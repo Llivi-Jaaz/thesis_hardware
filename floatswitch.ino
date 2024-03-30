@@ -37,23 +37,23 @@ void loop() {
   // Printing LoRa ID
   Serial.print("ID: ");
   for (int i = 0; i < 8; i++) {
-    Serial.print(uniqueID[i], HEX);
-    Serial.print(" ");
-    Serial.println(" ");
+  Serial.print(uniqueID[i], HEX);
+  Serial.print(" ");
+  Serial.println(" ");
   }
 
   // Float Switch status
   int floatState = digitalRead(fltswtch);
 
   if (floatState == LOW) {
-    digitalWrite(led, LOW);
-    Serial.println("LOW");
-    //LoRa.print("LOW");
+  digitalWrite(led, LOW);
+  Serial.println("LOW");
+  LoRa.print("LOW");
   }
   else {
-    digitalWrite(led, HIGH);
-    Serial.println("HIGH");
-   // LoRa.print("HIGH");
+  digitalWrite(led, HIGH);
+  Serial.println("HIGH");
+  LoRa.print("HIGH");
   }
  LoRa.endPacket();
   counter++;
