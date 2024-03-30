@@ -39,8 +39,8 @@ void loop() {
   for (int i = 0; i < 8; i++) {
   Serial.print(uniqueID[i], HEX);
   Serial.print(" ");
-  Serial.println(" ");
   }
+  Serial.println(" ");
 
   // Float Switch status
   int floatState = digitalRead(fltswtch);
