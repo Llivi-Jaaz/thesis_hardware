@@ -5,7 +5,7 @@ int fltswtch = 8;
 int led = 3;
 
 
-
+byte uniqueID[8];
 int counter = 0;
 void setup() {
   Serial.begin(9600);
@@ -21,35 +21,39 @@ void setup() {
   pinMode(fltswtch, INPUT_PULLUP);
   pinMode (led, OUTPUT);
 
-  byte uniqueID[8];
-  LoRa.getUniqueId(uniqueID);
+  byte uniqueID[] = {0xAB, 0xCD, 0xEF, 0x12, 0x34, 0x56, 0x78, 0x90};
+
 }
 
 
 void loop() {
-  Serial.print("Sending packet: ");
+  // Sending packets
+  Serial.print("Packet: ");
   Serial.println(counter);
-  // send packet
   LoRa.beginPacket();
   LoRa.print("Data:");
   LoRa.print(counter);
 
-  Serial.print("LoRa Module Unique ID: ");
+  // Printing LoRa ID
+  Serial.print("ID: ");
   for (int i = 0; i < 8; i++) {
     Serial.print(uniqueID[i], HEX);
     Serial.print(" ");
+    Serial.println(" ");
   }
+
+  // Float Switch status
   int floatState = digitalRead(fltswtch);
 
   if (floatState == LOW) {
     digitalWrite(led, LOW);
-    Serial.println("WATER LEVEL: LOW");
-    LoRa.print("WATER LEVEL: LOW");
+    Serial.println("LOW");
+    //LoRa.print("LOW");
   }
   else {
     digitalWrite(led, HIGH);
-    Serial.println("WATER LEVEL: HIGH");
-    LoRa.print("WATER LEVEL: HIGH");
+    Serial.println("HIGH");
+   // LoRa.print("HIGH");
   }
  LoRa.endPacket();
   counter++;
