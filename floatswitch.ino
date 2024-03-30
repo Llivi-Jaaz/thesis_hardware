@@ -30,16 +30,20 @@ void loop() {
   Serial.print("Packet: ");
   Serial.println(counter);
   LoRa.beginPacket();
-  //LoRa.print("Data:");
   LoRa.print(counter);
+  LoRa.println(" ")
 
   // Printing LoRa ID
   Serial.print("ID: ");
   for (int i = 0; i < 8; i++) {
   Serial.print(uniqueID[i], HEX);
+  LoRa.print(uniqueID[i], HEX);
+
   Serial.print(" ");
+  LoRa.print(" ");
   }
   Serial.println(" ");
+  LoRa.println(" ");
 
   // Float Switch status
   int floatState = digitalRead(fltswtch);
