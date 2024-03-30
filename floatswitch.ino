@@ -6,7 +6,6 @@ int led = 3;
 int counter = 0;
 
 byte uniqueID[8];
-byte uniqueID[] = {0xAB, 0xCD, 0xEF, 0x12, 0x34, 0x56, 0x78, 0x90};
 
 void setup() {
   Serial.begin(9600);
@@ -21,6 +20,8 @@ void setup() {
 
 pinMode(fltswtch, INPUT_PULLUP);
 pinMode (led, OUTPUT);
+
+byte uniqueID[] = {0xAB, 0xCD, 0xEF, 0x12, 0x34, 0x56, 0x78, 0x90};
 }
 
 
