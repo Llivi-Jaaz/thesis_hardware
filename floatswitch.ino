@@ -4,8 +4,7 @@
 int fltswtch = 8;
 int led = 3;
 int counter = 0;
-
-byte uniqueID[8];
+int uniqueID = 12345678;
 
 void setup() {
   Serial.begin(9600);
@@ -18,45 +17,42 @@ void setup() {
   LoRa.setSyncWord(0xF3);
   LoRa.setTxPower(20);
 
-pinMode(fltswtch, INPUT_PULLUP);
-pinMode (led, OUTPUT);
-
-byte uniqueID[] = {0xAB, 0xCD, 0xEF, 0x12, 0x34, 0x56, 0x78, 0x90};
+  pinMode(fltswtch, INPUT_PULLUP);
+  pinMode (led, OUTPUT);
 }
 
 
 void loop() {
   // Sending packets
-  Serial.print("Packet: ");
+  Serial.print("\nPacket: ");
   Serial.println(counter);
+
+  // Printing packets (LoRa)
   LoRa.beginPacket();
+  LoRa.print("Packet: ");
   LoRa.print(counter);
-  LoRa.println(" ")
 
-  // Printing LoRa ID
+  // Printing LoRa ID (LoRa)
   Serial.print("ID: ");
-  for (int i = 0; i < 8; i++) {
-  Serial.print(uniqueID[i], HEX);
-  LoRa.print(uniqueID[i], HEX);
+  Serial.print(uniqueID);
+  LoRa.print("ID: ");
+  LoRa.print(uniqueID);
 
-  Serial.print(" ");
-  LoRa.print(" ");
-  }
-  Serial.println(" ");
-  LoRa.println(" ");
-
-  // Float Switch status
+  // Float Switch status (LoRa)
+  Serial.print("Status: ");
+  LoRa.print("Status: ");
+  
   int floatState = digitalRead(fltswtch);
 
-  if (floatState == LOW) {
+  if (floatState == false) {
   digitalWrite(led, LOW);
-  Serial.println("LOW");
-  LoRa.print("LOW");
+  Serial.print(false);
+  LoRa.print(false);
   }
   else {
   digitalWrite(led, HIGH);
-  Serial.println("HIGH");
-  LoRa.print("HIGH");
+  Serial.print(true);
+  LoRa.print(true);
   }
  LoRa.endPacket();
   counter++;
